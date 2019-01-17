@@ -1,0 +1,262 @@
+<div class="container">
+  <!-- inicio panel Deal -->
+  <div class="jumbotron">
+    <!-- inicio Top Deal -->
+    <div class="regentry">
+      <div class="form-group row">
+        <div class="col-10"></div>
+        <div class="col-2 text-right">
+          <button type="submit" class="btn btn-primary" (click)="onNewDeal()">New Deal</button>
+        </div>
+      </div>
+    </div><!-- fim Top Deal -->
+    <!-- inicio form Deal -->
+    <div class="regentry" *ngIf="showNewDeal">
+      <form (ngSubmit)="onSaveDeal()">
+        <div class="form-group row">
+          <label for="nome-input" class="col-2 col-form-label">Title</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="dealModel.title" name="title">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cpf-input" class="col-2 col-form-label">Text</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="dealModel.text" name="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="idade-input" class="col-2 col-form-label">Create Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" [(ngModel)]="dealModel.createDate" name="createDate">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sexo-input" class="col-2 col-form-label">Publish Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" [(ngModel)]="dealModel.publishDate" name="publishDate">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="estado-civil-input" class="col-2 col-form-label">End Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" [(ngModel)]="dealModel.endDate" name="endDate">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="estado-input" class="col-2 col-form-label">URL</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="dealModel.url" name="url">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="dependentes-input" class="col-2 col-form-label">Total Sold</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="dealModel.totalSold" name="totalSold">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="renda-input" class="col-2 col-form-label">Type</label>
+          <div class="col-10">
+            <select class="form-control" [(ngModel)]="dealModel.type" name="type">
+              <option [value]="i" *ngFor="let i of types">{{i}}</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-primary" (click)="onCancelDeal()">Cancel</button>
+      </form>
+    </div><!-- fim form Deal -->
+    <!-- inicio table Deal -->
+    <div class="reglist">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Text</th>
+            <th>Create Date</th>
+            <th>Publish Date</th>
+            <th>End Date</th>
+            <th>URL</th>
+            <th>Total Sold</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let deal of deals">
+            <td>{{deal.title}}</td>
+            <td>{{deal.text}}</td>
+            <td>{{deal.createDate | date:dateFormat}}</td>
+            <td>{{deal.publishDate | date:dateFormat}}</td>
+            <td>{{deal.endDate | date:dateFormat}}</td>
+            <td>{{deal.url}}</td>
+            <td>{{deal.totalSold}}</td>
+            <td>{{deal.type}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- fim table Deal -->
+  </div><!-- fim panel Deal -->
+  <br />
+  <!-- inicio panel BuyOption -->
+  <div class="jumbotron">
+    <!-- inicio top BuyOption -->
+    <div class="regentry">
+      <div class="form-group row">
+        <div class="col-10"></div>
+        <div class="col-2 text-right">
+          <button type="submit" class="btn btn-primary" (click)="onNewBuyOption()">New BuyOption</button>
+        </div>
+      </div>
+    </div><!-- fim panel BuyOption -->
+    <!-- inicio form BuyOption -->
+    <div class="regentry" *ngIf="showNewBuyOption">
+      <form (ngSubmit)="onSaveBuyOption()">
+        <div class="form-group row">
+          <label for="nome-input" class="col-2 col-form-label">Title</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="buyOptionModel.title" name="title">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cpf-input" class="col-2 col-form-label">Normal Price</label>
+          <div class="col-10">
+            <input class="form-control" [(ngModel)]="buyOptionModel.normalPrice" name="normalPrice" type="number" step="0.01"
+              data-number-to-fixed="2" data-number-stepfactor="100">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="idade-input" class="col-2 col-form-label">Sale Price</label>
+          <div class="col-10">
+            <input class="form-control" [(ngModel)]="buyOptionModel.salePrice" name="salePrice" type="number" step="0.01"
+              data-number-to-fixed="2" data-number-stepfactor="100">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sexo-input" class="col-2 col-form-label">Percentagel Discount</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="buyOptionModel.percentagelDiscount" name="percentagelDiscount">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="estado-civil-input" class="col-2 col-form-label">Quantity Cupom</label>
+          <div class="col-10">
+            <input class="form-control" type="text" [(ngModel)]="buyOptionModel.quantityCupom" name="quantityCupom">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="estado-input" class="col-2 col-form-label">Start Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" [(ngModel)]="buyOptionModel.startDate" name="startDate">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="dependentes-input" class="col-2 col-form-label">End Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" [(ngModel)]="buyOptionModel.endDate" name="endDate">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-primary" (click)="onCancelBuyOption()">Cancel</button>
+      </form>
+    </div><!-- fim form BuyOption -->
+    <!-- inicio table BuyOption -->
+    <div class="reglist">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Normal Price</th>
+            <th>Sale Price</th>
+            <th>Percentagel Discount</th>
+            <th>Quantity Cupom</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let buyOption of buyOptions">
+            <td>{{buyOption.title}}</td>
+            <td>{{buyOption.normalPrice}}</td>
+            <td>{{buyOption.salePrice}}</td>
+            <td>{{buyOption.percentagelDiscount}}</td>
+            <td>{{buyOption.quantityCupom}}</td>
+            <td>{{buyOption.startDate | date:dateFormat}}</td>
+            <td>{{buyOption.endDate | date:dateFormat}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- fim table BuyOption -->
+  </div><!-- fim panel BuyOption -->
+  <br />
+  <!-- inicio panel Associacao -->
+  <div class="jumbotron">
+    <!-- inicio form Associacao -->
+    <div class="regentry">
+      <form (ngSubmit)="onAssociate()">
+        <div class="form-group row">
+          <div class="col-5">
+            <label for="estado-input" class="col-form-label">Select Deal</label>
+          </div>
+          <div class="col-5">
+            <label for="estado-input" class="col-form-label">Select BuyOption</label>
+          </div>
+          <div class="col-2"></div>
+        </div>
+        <div class="form-group row">
+          <div class="col-5">
+            <select class="form-control" [(ngModel)]="dealModel" name="deal">
+              <option [ngValue]="deal" *ngFor="let deal of deals">{{deal.title}} </option>
+            </select>
+          </div>
+          <div class="col-5">
+            <select class="form-control" [(ngModel)]="buyOptionModel" name="buyOption">
+              <option [ngValue]="buyOption" *ngFor="let buyOption of buyOptions">{{buyOption.title}}</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary">Associar</button>
+          </div>
+        </div>
+      </form>
+    </div><!-- fim form Associacao -->
+    <!-- inicio table Associacao -->
+    <div class="reglist">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Deal</th>
+            <th>TotalSold</th>
+            <th>BuyOption</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let deal of deals">
+            <td>{{deal.title}}</td>
+            <td>{{deal.totalSold}}</td>
+            <td>
+              <table ngif="deal.buyOptions" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Normal Price</th>
+                    <th>Sale Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let buyOption of deal.buyOptions">
+                    <td>{{buyOption.title }}</td>
+                    <td>{{buyOption.normalPrice}}</td>
+                    <td>{{buyOption.salePrice}}</td>
+                    <td><button type="submit" class="btn btn-primary" (click)="onBuyBuyOption(deal.id, buyOption.id)">Comprar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- fim table Associacao -->
+  </div><!-- fim panel BuyOption -->
+</div>
