@@ -20,13 +20,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @ApiModel(description = "All details about the Deal. ")
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Deal {
 
@@ -49,6 +47,10 @@ public class Deal {
 
 	@Transient
 	private DealRepository repository;
+
+	public Deal() {
+		super();
+	}
 
 	public Deal(DealRepository repository) {
 		this.repository = repository;
